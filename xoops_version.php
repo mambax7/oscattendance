@@ -12,12 +12,19 @@ $modversion['dirname'] = "oscattendance";
 $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
 $modversion['tables'][0] = "oscatt_events";
 $modversion['tables'][1] = "oscatt_attendance";
+$modversion['tables'][2] = "oscatt_attendance_person";
 
 // Templates
 $modversion['templates'][0]['file'] = 'attendance.html';
 $modversion['templates'][0]['description'] = 'Main Attendance Page';
 $modversion['templates'][1]['file'] = 'eventview.html';
 $modversion['templates'][1]['description'] = 'Events';
+$modversion['templates'][2]['file'] = 'manageattendance.html';
+$modversion['templates'][2]['description'] = 'Manage Attendance';
+$modversion['templates'][3]['file'] = 'oscattreports.html';
+$modversion['templates'][3]['description'] = 'Attendance Reports';
+$modversion['templates'][4]['file'] = 'atthistory.html';
+$modversion['templates'][4]['description']='Attendance History Report';
 
 $modversion['blocks'][0]['file'] = "oscattnav.php";
 $modversion['blocks'][0]['name'] = _oscatt_navigationblock;

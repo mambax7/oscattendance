@@ -1,11 +1,6 @@
 <?php
-// $Id: oscmemnav.php,v 1.1.1.1 2006/08/08 14:57:25 root Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//                XOOPS - OSC Open Source Church Project//
+// $Id: oscmattnav.php,2007/06/01 
+//  //                XOOPS - OSC Open Source Church Project//
 //                    Copyright (c) 2005 ChurchLedger.com //
 //                       <http://www.churchledger.com/>                             //
 //  This program is free software; you can redistribute it and/or modify     //
@@ -30,11 +25,7 @@
 // Author: Steve McAtee                                          //
 // URL: http://www.churchledger.com, http://www.xoops.org/
 // Project: The XOOPS Project, The Open Source Church project (OSC)
-// -------------------------------------------------------------------------// **************************************************************************//
-// * Function: churchsplashblock_show  *//
-// * Output  : Returns the links content                                  *//
-// **************************************************************************//
-
+// -------------------------------------------------------------------------// 
 // include the default language file for the admin interface
 
 
@@ -48,9 +39,13 @@ $content_block="
 <a class=navbar href='" . XOOPS_URL . "/modules/oscattendance/eventslist.php" . "'>" .  _oscatt_nav_events . "</a>
 </small></td><td>|</td><td align=center><small>
 
-<a href='" . XOOPS_URL . "/modules/oscgiving/DonationEditor.php'> " . _oscatt_nav_attendance . "</a>
+<a href='" . XOOPS_URL . "/modules/oscattendance/recordattendance.php?action=create'> " . _oscatt_nav_recordattendance . "</a>
 </small></td>
-<td>|</td><td align=center><small><a href='" . XOOPS_URL . "/modules/oscgiving/reports.php'>" . _oscatt_nav_reports . "</a></small></td>
+<td>|</td><td align=center><small>
+
+<a href='" . XOOPS_URL . "/modules/oscattendance/manageattendance.php'> " . _oscatt_nav_manageattendance . "</a>
+</small></td>
+<td>|</td><td align=center><small><a href='" . XOOPS_URL . "/modules/oscattendance/reports.php'>" . _oscatt_nav_reports . "</a></small></td>
 </tr>
 </table>
 ";

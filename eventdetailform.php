@@ -68,7 +68,6 @@ if (isset($_POST['id'])) $eventid=$_POST['id'];
 if (isset($_POST['action'])) $action=$_POST['action'];
 if (isset($_GET['action'])) $action=$_GET['action'];
 
-
 $myts = &MyTextSanitizer::getInstance();
 $event_handler = &xoops_getmodulehandler('event', 'oscattendance');
     
@@ -97,11 +96,13 @@ switch (true)
 
 		break;
 	case($op=="create"):
+		if(isset($_POST['eventname'])) $event->assignVar('event_Name',$_POST['eventname']);
+
 		$event->assignVar('dateentered',date('y-m-d g:i:s'));
 		$event->assignVar('enteredby',$xoopsUser->getVar('uid'));
 		$eventid= $event_handler->insert($event);	
 		$message=_oscatt_CREATESUCCESS_event;
-		//redirect_header("eventdetailform.php?id=" . $eventid, 3, $message);
+		redirect_header("eventdetailform.php?id=" . $eventid, 3, $message);
 		break;
 		
 		
@@ -119,7 +120,7 @@ if($event->getVar('editedby')<>'')
 	$user = $member_handler->getUser($event->getVar('editedby'));
 }
 
-$editedby_label = new XoopsFormLabel(_oscatt_editedby, $user->getVar('uname'));
+//$editedby_label = new XoopsFormLabel(_oscatt_editedby, $user->getVar('uname'));
 
 $dateentered_label = new XoopsFormLabel(_oscatt_dateentered, $event->getVar('dateentered'));
 

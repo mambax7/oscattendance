@@ -9,6 +9,7 @@ define("_oscatt_indextitle","Attendance Main Page");
 
 define("_oscatt_navigation_description","Navigation Block for OSC Attendance");
 define("_oscatt_navigationblock","Navigation Block");
+define("_oscatt_nav_recordattendance","Record Attendance");
 
 define("_oscatt_accessdenied","Access Denied");
 define("_oscatt_event_list","Event List");
@@ -31,4 +32,34 @@ define("_oscatt_addevent_redirect","Redirecting to Add Event");
 define("_oscatt_CREATESUCCESS_event","Event Successfully Created");
 define("_oscatt_UPDATESUCCESS","Event Successfully Updated.");
 define("_oscmatt_eventdetail_TITLE","Event Detail View");
+
+define("_oscatt_date","Date");
+define("_oscatt_month","Month");
+define("_oscatt_year","Year");
+
+define("_oscatt_recordattendance_TITLE","Record Attendance at an Event<br><small>Please fill the cart with members you wish to add to this attendance prior to completing the screen below.</small>");
+
+define("_oscatt_cartcontents","Contents of Cart");
+define("_oscatt_lastname","Last Name");
+define("_oscatt_firstname","First Name");
+define("_oscatt_address","Address");
+define("_oscatt_totalcountis","Total Count is");
+define("_oscatt_count","Count");
+define("_oscatt_CREATESUCCESS_attendance","Attendance Successfully Created");
+define("_oscatt_nav_manageattendance","Manage Attendance");
+
+define("_oscatt_manageattendance_list","Manage Attendance");
+define("_oscatt_addatttocart","Add Attendees to Cart");
+define("_oscatt_delete","Delete");
+define("_oscatt_delete_success","Attendance Successfully deleted");
+define("_oscatt_reporttitle","Attendance Reports");
+define("_oscatt_eventatthistoryreport2year","Event Attendance History (2 years)");
+define("_oscatt_membersnoatt6month","Active Members that have not attended any event within Six Months");
+define("_oscatt_eventhistoryattreporttitle","Event Attendance History");
+define("_oscatt_submit","Submit");
+
+define("_oscatt_attendancereport_title","Event Attendance");
+define("_oscatt_phone","Phone");
+define("_oscatt_fax","Fax");
+define("_oscatt_website","Website");
 ?>

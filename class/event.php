@@ -78,6 +78,26 @@ class oscAttendanceEventHandler extends XoopsObjectHandler
         }
         return $event;
     }
+
+    function &getall()
+    {
+    	$returnevents = array();
+        $event =&$this->create(false);
+	$i=0;
+	$sql = "SELECT * FROM " . $event->table;
+	
+	$result = $this->db->query($sql);
+	
+	while($row = $this->db->fetchArray($result)) 
+	{
+	        $event =&$this->create(false);
+		$event->assignVars($row);
+		$returnevents[$i]=$event;
+		$i++;
+	}
+	
+        return $returnevents;
+    }
         
     function &search($searcharray, $sort)
     //Search on criteria and return result
