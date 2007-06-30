@@ -282,7 +282,6 @@ class oscAttendanceAttendanceHandler extends XoopsObjectHandler
 	
 		if(count($badids)>0)
 		{
-			echo count($badids);
 			$returnbarcodes=implode("\n",$badids);
 			return $returnbarcodes;
 		}

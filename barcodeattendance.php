@@ -68,11 +68,11 @@ switch (true)
 		{
 			$alert=_oscatt_invalidbarcodes;
 			$barcodes=$resultbarcodes;
-	//		redirect_header("index.php", 3, $message);
 		}
 		else
 		{		
 			$message=_oscatt_CREATESUCCESS_attendance;
+			redirect_header("index.php", 3, $message);
 		}
 			
 	break;
