@@ -62,4 +62,8 @@ define("_oscatt_attendancereport_title","Event Attendance");
 define("_oscatt_phone","Phone");
 define("_oscatt_fax","Fax");
 define("_oscatt_website","Website");
+define("_oscatt_barcodeattendance_TITLE","Barcode Attendance");
+define("_oscatt_barcodes","Barcoded Member Id's<br><br><small>Paste scanned barcodes into this text area.</small>");
+define("_oscatt_invalidbarcodes","The Member ID's in the right text area are invalid and have not been entered.  Most likely the id's do not exist in the system or there was a data entry error.");
+define("_oscatt_CREATEFAILURE_attendance","The attendance module was unable to record attendance.  This might be due that the event/attendance already exists.  Please delete the existing attendance and rerecord the attendance.");
 ?>

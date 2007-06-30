@@ -42,6 +42,10 @@ $content_block="
 <a href='" . XOOPS_URL . "/modules/oscattendance/recordattendance.php?action=create'> " . _oscatt_nav_recordattendance . "</a>
 </small></td>
 <td>|</td><td align=center><small>
+<a href='" . XOOPS_URL . "/modules/oscattendance/barcodeattendance.php?action=create'> " . _oscatt_nav_barcodeattendance . "</a>
+</small></td>
+
+<td>|</td><td align=center><small>
 
 <a href='" . XOOPS_URL . "/modules/oscattendance/manageattendance.php'> " . _oscatt_nav_manageattendance . "</a>
 </small></td>
