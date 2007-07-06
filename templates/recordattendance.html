@@ -1,0 +1,40 @@
+<h2 class=comTitle><{$title}></h2>
+
+<form action='recordattendance.php>' name='recordattendanceform' method="POST">
+<table class='outer' >
+<tr><TD colspan="4">
+
+<input type="text" name="filter">&nbsp; 
+<input type="submit" name="submit" value="<{$oscatt_applyfilter}>">&nbsp;
+<input type="submit" name="submit" value="<{$oscatt_clearfilter}>"></TD><td align="right">
+<input type="submit" name="submit" value="<{$oscatt_addevent}>">
+</td></tr>
+<tr><th><input name="allbox" id="allbox" onclick="xoopsCheckAll('listform','allbox');" type="checkbox" value="Check All" /></th>
+<th><a href='eventslist.php?sort=name' class=sort><{$oscatt_eventname}></a></th>
+<th>&nbsp;</th>
+</tr>
+<{foreach item=event from=$events}>
+<{ if $event->getVar('oddrow') == true }>
+<tr class="odd">
+<{/if}>
+<{ if $event->getVar('oddrow') == false }>
+<tr class="even">
+<{/if}>
+
+<td width=10><input name="chk<{$event->getVar('loopcount')}>" value="<{$event->getVar('event_id')}>" type="checkbox"></td>
+<td><{$event->getVar('event_Name')}></td>
+<td><{ if $is_perm_view }>
+<a href='eventdetailview.php?id=<{$event->getVar('event_id')}>'><{$oscatt_view}></a>
+<{/if}>
+&nbsp;&nbsp;&nbsp;
+<{ if $is_perm_modify }>
+<a href='eventdetailform.php?id=<{$event->getVar('event_id')}>'><{$oscatt_edit}></a>
+<{/if}>
+</td>
+</tr>
+<{/foreach}>
+
+</table>
+<input type="hidden" name="loopcount" value="<{$loopcount}>">
+</form>
+

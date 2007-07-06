@@ -1,0 +1,38 @@
+
+<h2 class=comTitle><{$title}></h2>
+
+<form action='manageattendance.php?sort=<{$sort}>' name='listform' method="POST">
+<input type=hidden name=sortprior value='<{$sort}>'>
+<table class='outer' >
+<tr><TD colspan="3">
+
+<input type="text" name="filter">&nbsp; 
+<input type="submit" name="submit" value="<{$oscatt_applyfilter}>">&nbsp;
+<input type="submit" name="submit" value="<{$oscatt_clearfilter}>"></TD><td align="right">
+<input type="submit" name="submit" value="<{$oscatt_addatttocart}>">
+<input type="submit" name="submit" value="<{$oscatt_delete}>">
+
+</td>
+</tr>
+<tr><th><input name="allbox" id="allbox" onclick="xoopsCheckAll('listform','allbox');" type="checkbox" value="Check All" /></th>
+<th><a href='manageattendance.php?sort=name' class=sort><{$oscatt_eventname}></a></th>
+<th><a href='manageattendance.php?sort=date' class=sort><{$oscatt_date}></a></th><th><a href='manageattendance.php?sort=count' class=sort><{$oscatt_count}></a></th>
+</tr>
+<{foreach item=attendanceevent from=$attendanceevents}>
+<{ if $attendanceevent->getVar('oddrow') == true }>
+<tr class="odd">
+<{/if}>
+<{if $attendanceevent->getVar('oddrow') == false }>
+<tr class="even">
+<{/if}>
+<td width=10><input name="chk<{$attendanceevent->getVar('loopcount')}>" value="<{$attendanceevent->getVar('att_id')}>" type="checkbox"></td>
+<td><{$attendanceevent->getVar('event_Name')}></td>
+<td><{$attendanceevent->getVar('att_Date')}></td>
+<td><{$attendanceevent->getVar('attendancecount')}></td>
+</tr>
+<{/foreach}>
+
+</table>
+<input type="hidden" name="loopcount" value="<{$loopcount}>">
+</form>
+
