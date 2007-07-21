@@ -38,12 +38,11 @@ class  attPerson extends Person {
 
 }    
     
-
-class oscAttendanceattPersonHandler extends XoopsObjectHandler
+//oscMembershipPersonHandler
+//class oscAttendanceattPersonHandler extends XoopsObjectHandler
+class oscAttendanceattPersonHandler extends oscMembershipPersonHandler
 {
-
-
-    
+  
     function &create($isNew = true)
     {
         $person = new attPerson();
@@ -57,17 +56,22 @@ class oscAttendanceattPersonHandler extends XoopsObjectHandler
 	{
 	    	$persons[]=array();
 
-		$sql="select p.*, events.att_id lastattid, a.att_Date, e.event_Name  from " . $this->db->prefix("oscmembership_person") . " p left join (select ap.att_personid, DATEDIFF(curdate(),a.att_Date)  from " . $this->db->prefix("oscatt_attendance_person") . "  ap join " . $this->db->prefix("oscatt_attendance") . " a on ap.att_id = a.att_id where DATEDIFF(curdate(),a.att_Date)<" . $days . " and DATEDIFF(curdate(),a.att_Date)>0 ) list on p.id=list.att_personid left join (select distinct max(att_Date), max(ap.att_id) att_id,ap.att_personid from " . $this->db->prefix("oscatt_attendance_person") . " ap join  " . $this->db->prefix("oscatt_attendance") . " a on ap.att_id = a.att_id group by ap.att_personid ) events on p.id = events.att_personid left join  " . $this->db->prefix("oscatt_attendance") . " a on events.att_id = a.att_id left join " . $this->db->prefix("oscatt_events") . " e on a.event_id = e.event_id where list.att_personid is null and p.clsid=1";
+		$sql="select p.*, events.att_id lastattid, a.att_Date, e.event_Name from " . $this->db->prefix("oscmembership_person") . " p left join (select ap.att_personid, DATEDIFF(curdate(),a.att_Date) daydiff from " . $this->db->prefix("oscatt_attendance_person") . " ap join  " . $this->db->prefix("oscatt_attendance") . " a on ap.att_id = a.att_id where DATEDIFF(curdate(),a.att_Date)>" . $days . " ) list on p.id=list.att_personid left join (select distinct max(att_Date) att_Date, max(ap.att_id) att_id,ap.att_personid from " . $this->db->prefix("oscatt_attendance_person") . " ap join  " . $this->db->prefix("oscatt_attendance") . " a on ap.att_id = a.att_id group by ap.att_personid ) events on p.id = events.att_personid left join  " . $this->db->prefix("oscatt_attendance") . " a on events.att_id = a.att_id left join " . $this->db->prefix("oscatt_events") . " e on a.event_id = e.event_id where list.daydiff is null and p.clsid=1 ";
+
 
 		if(isset($searcharray))
 		{
 			$count = count($searcharray);
 			if ( $count > 0 && is_array($searcharray) ) 
 			{
-				$sql .= " and (lastname LIKE '%$searcharray[0]%' OR firstname LIKE '%$searcharray[0]%' OR homephone like '%$searcharray[0]%' or workphone like '%$searcharray[0]%' or cellphone like '%$searcharray[0]%' or address1 like '%$searcharray[0]%')";
+				if($searcharray[0]!="")
+				{
+					$sql .= " and (lastname LIKE '%$searcharray[0]%' OR firstname LIKE '%$searcharray[0]%' OR homephone like '%$searcharray[0]%' or workphone like '%$searcharray[0]%' or cellphone like '%$searcharray[0]%' or address1 like   '%$searcharray[0]%' or city like '%$searcharray[0]%' or state like '%$searcharray[0]%' )";
+				}
 			}
 		}
 
+//echo $sql;
 		if (!$result = $this->db->query($sql)) 
 		{
 			return false;
@@ -79,6 +83,7 @@ class oscAttendanceattPersonHandler extends XoopsObjectHandler
 			{
 				$person =&$this->create(false);
 				$person->assignVars($row);
+				$person->assignVar('loopcount',$i);
 				$persons[$i]=$person;
 				$i++;
 			}		
@@ -86,7 +91,7 @@ class oscAttendanceattPersonHandler extends XoopsObjectHandler
 			if($i>0)
 			{
 				$person=$persons[0];
-				$person->assignVar('totalloopcount',$loopcount-1);
+				$person->assignVar('totalloopcount',$i-1);
 				$persons[0]=$person;
 				
 			}

@@ -20,11 +20,14 @@ if(!($ispermmodify==true || $ispermview==true) & !($xoopsUser->isAdmin($xoopsMod
     redirect_header(XOOPS_URL , 3, _oscatt_accessdenied);
 }
 
+$days=90;  //set default
 if (isset($_GET['op'])) $op = $_GET['op'];
 if (isset($_POST['op'])) $op = $_POST['op'];
 if (isset($_POST['action'])) $action=$_POST['action'];
 if (isset($_GET['action'])) $action=$_GET['action'];
 if (isset($_POST['loopcount'])) $totalloopcount = $_POST['loopcount'];
+if (isset($_POST['days'])) $days=$_POST['days'];
+
 
 if (isset($_POST['submit'])) $submit = $_POST['submit'];
 
@@ -41,17 +44,14 @@ include(XOOPS_ROOT_PATH."/header.php");
 
 $attendance_handler = &xoops_getmodulehandler('attendance','oscattendance');
 $attendanceev_handler = &xoops_getmodulehandler('attendanceevent', 'oscattendance');
-if(isset($filter))
-{
-	$searcharray[0]=$filter;
-}
-else $searcharray[0]='';
+$attperson_handler = &xoops_getmodulehandler('attperson','oscattendance');
+
 
 if(isset($submit))
 {
 	switch($submit)
 	{
-		case _oscatt_addatttocart:
+		case _oscatt_addtocart:
 		//Add selected attendance to cart
 			for($i=0;$i<$totalloopcount+1;$i++)
 			{
@@ -59,35 +59,27 @@ if(isset($submit))
 				{
 					$id=$_POST['chk' . $i];
 					$uid=$xoopsUser->getVar('uid');
-					$attendance=$attendance_handler->get($id);
-					$attendance_handler->addtoCart($attendance,$uid);	
+					$attperson_handler->addtoCart($id,$uid);
 				}
 			}
 			//redirect to view cart
-			redirect_header(XOOPS_URL . "/modules/oscmembership/viewcart.php",3,_oscmem_addedtocart);
+			redirect_header(XOOPS_URL . "/modules/oscmembership/viewcart.php",3,_oscatt_addedtocart);
 		
 		break;
+
+		case _oscatt_clearfilter:
+			$filter="";
+		break;
 		
-		case _oscatt_delete:
-			for($i=0;$i<$totalloopcount+1;$i++)
-			{
-				if (isset($_POST['chk' . $i]))
-				{
-					$id=$_POST['chk' . $i];
-					$attendance=$attendance_handler->get($id);
-					$attendance_handler->delete($attendance);	
-				}
-			}
-			
-			redirect_header("manageattendance.php",3,_oscatt_delete_success);
 	}
 }
 
 
-$attperson_handler = &xoops_getmodulehandler('attperson','oscattendance');
-
-//get attendance count for last 90 days
-$days=30;
+if(isset($filter))
+{
+	$searcharray[0]=$filter;
+}
+else $searcharray[0]='';
 
 $persons=$attperson_handler->getNoAttendees($days,$searcharray,$sort);
 
@@ -99,7 +91,7 @@ $xoopsTpl->assign("oscatt_address",_oscatt_address);
 $xoopsTpl->assign("oscatt_phone",_oscatt_phone);
 $xoopsTpl->assign("oscatt_eventname",_oscatt_eventname);
 $xoopsTpl->assign('oscatt_applyfilter',_oscatt_applyfilter);
-$xoopsTpl->assign('oscatt_clearfilter',_oscmem_clearfilter);
+$xoopsTpl->assign('oscatt_clearfilter',_oscatt_clearfilter);
 $xoopsTpl->assign('is_perm_view',$ispermview);
 $xoopsTpl->assign('is_perm_modify',$ispermmodify);
 $xoopsTpl->assign('oscatt_view',_oscmem_view);
@@ -108,6 +100,9 @@ $xoopsTpl->assign("oscatt_count",_oscatt_count);
 $xoopsTpl->assign('persons',$persons);
 $xoopsTpl->assign('oscatt_addtocart',_oscatt_addtocart);
 $xoopsTpl->assign('oscatt_lasteventdate',_oscatt_lasteventdate);
+$xoopsTpl->assign('oscatt_applydays',_oscatt_applydays);
+$xoopsTpl->assign('days',$days);
+
 $xoopsTpl->assign('filter',$filter);
 
 if(count($persons)>0)

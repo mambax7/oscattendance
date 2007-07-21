@@ -9,6 +9,7 @@
 <input type="text" name="filter" value="<{$filter}>">&nbsp; 
 <input type="submit" name="submit" value="<{$oscatt_applyfilter}>">&nbsp;
 <input type="submit" name="submit" value="<{$oscatt_clearfilter}>"></TD><td align="right">
+&nbsp;&nbsp;<input type="text" name="days" maxlength="5" size="5" value="<{$days}>"><input type="submit" name="submit" value="<{$oscatt_applydays}>">&nbsp;
 <input type="submit" name="submit" value="<{$oscatt_addtocart}>">
 
 </td>
@@ -29,11 +30,11 @@
 <{/if}>
 
 <td width=10><input name="chk<{$person->getVar('loopcount')}>" value="<{$person->getVar('id')}>" type="checkbox"></td>
-<td><{$person->getVar('lastname')}></td>
-<td><{$person->getVar('address1')}></td>
+<td><{$person->getVar('lastname')}>, <{$person->getVar('firstname')}></td>
+<td><{$person->getVar('address1')}> <{$person->getVar('city')}>, <{$person->getVar('state')}></td>
 <td><{$person->getVar('homephone')}></td>
-<td><{$person->getVar('event_name')}></td>
-<td><{$person->getVar('event_date')}></td>
+<td><{$person->getVar('event_Name')}></td>
+<td><{$person->getVar('att_Date')}></td>
 </tr>
 <{/foreach}>
 
