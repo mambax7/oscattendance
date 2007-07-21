@@ -71,7 +71,7 @@ $xoopsTpl->assign('events',$results);
 
 $event=$results[0];
 
-$totalloopcount=$event['totalloopcount'];
+$totalloopcount=$event->getVar('totalloopcount');
 
 $xoopsTpl->assign('loopcount', $totalloopcount);
 

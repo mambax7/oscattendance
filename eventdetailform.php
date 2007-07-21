@@ -102,7 +102,7 @@ switch (true)
 		$event->assignVar('enteredby',$xoopsUser->getVar('uid'));
 		$eventid= $event_handler->insert($event);	
 		$message=_oscatt_CREATESUCCESS_event;
-		redirect_header("eventdetailform.php?id=" . $eventid, 3, $message);
+		redirect_header("eventslist.php", 3, $message);
 		break;
 		
 		

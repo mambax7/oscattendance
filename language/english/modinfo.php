@@ -42,6 +42,8 @@ define("_oscatt_recordattendance_TITLE","Record Attendance at an Event<br><small
 define("_oscatt_cartcontents","Contents of Cart");
 define("_oscatt_lastname","Last Name");
 define("_oscatt_firstname","First Name");
+define("_oscatt_name","Name");
+
 define("_oscatt_address","Address");
 define("_oscatt_totalcountis","Total Count is");
 define("_oscatt_count","Count");
@@ -66,4 +68,9 @@ define("_oscatt_barcodeattendance_TITLE","Barcode Attendance");
 define("_oscatt_barcodes","Barcoded Member Id's<br><br><small>Paste scanned barcodes into this text area.</small>");
 define("_oscatt_invalidbarcodes","The Member ID's in the right text area are invalid and have not been entered.  Most likely the id's do not exist in the system or there was a data entry error.");
 define("_oscatt_CREATEFAILURE_attendance","The attendance module was unable to record attendance.  This might be due that the event/attendance already exists.  Please delete the existing attendance and rerecord the attendance.");
+define("_oscatt_lastevent","Last Event Attended");
+define("_oscatt_lasteventdate","Event Date");
+define("_noatt_table_header","The folowing individuals have not attended a church function in recent history.");
+define("_oscatt_noattendance_list","No Attendance List");
+define("_oscatt_addtocart","Add to Cart");
 ?>

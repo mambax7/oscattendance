@@ -91,15 +91,10 @@ class oscAttendanceAttendanceeventHandler extends XoopsObjectHandler
         if (isset($searcharray)) 
 	{
 	        $attendanceevent= &$this->create(false);
-		
-/*		$sql="
-create temporary table `att_count` (att_id mediumint(8), att_count mediumint(8)); 
-insert into att_count
-select att_id, count(1) from xoops_oscatt_attendance_person group by att_id;
-select a.*,e.event_Name,c.att_count `count`  from xoops_oscatt_attendance a join xoops_oscatt_events e on a.event_id = e.event_id
-join att_count c on a.att_id = c.att_id";
-*/
-		$sql="select a.*,e.event_Name,0 `count`  from xoops_oscatt_attendance a join xoops_oscatt_events e on a.event_id = e.event_id";
+
+		$sql="select a.*,e.event_Name,c.att_count `attendancecount` from xoops_oscatt_attendance a join xoops_oscatt_events e on a.event_id = e.event_id  join (select att_id, count(1) att_count from xoops_oscatt_attendance_person group by att_id) c on a.att_id=c.att_id";
+
+//		$sql="select a.*,e.event_Name,0 `count`  from xoops_oscatt_attendance a join xoops_oscatt_events e on a.event_id = e.event_id";
 
 
 		$count = count($searcharray);

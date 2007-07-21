@@ -1,0 +1,43 @@
+
+<h2 class=comTitle><{$title}></h2>
+
+<form action='noattendance_report.php?sort=<{$sort}>' name='listform' method="POST">
+<input type=hidden name=sortprior value='<{$sort}>'>
+<table class='outer' >
+<tr><TD colspan="5">
+
+<input type="text" name="filter" value="<{$filter}>">&nbsp; 
+<input type="submit" name="submit" value="<{$oscatt_applyfilter}>">&nbsp;
+<input type="submit" name="submit" value="<{$oscatt_clearfilter}>"></TD><td align="right">
+<input type="submit" name="submit" value="<{$oscatt_addtocart}>">
+
+</td>
+</tr>
+<tr><th><input name="allbox" id="allbox" onclick="xoopsCheckAll('listform','allbox');" type="checkbox" value="Check All" /></th>
+<th><!--<a href='noattendance_report.php?sort=name' class=sort>--><{$oscatt_name}><!--</a>--></th>
+<th><!--<a href='noattendance_report.php?sort=address' class=sort>--><{$oscatt_address}><!--</a>--></th><th><!--<a href='noattendance_report.php?sort=phone' class=sort>--><{$oscatt_phone}><!--</a>--></th>
+<th><!--<a href='noattendance_report.php?sort=eventname' class=sort>--><{$oscatt_eventname}><!--</a>--></th>
+<th><!--<a href='noattendance_report.php?sort=date' class=sort>--><{$oscatt_lasteventdate}><!--</a>--></th>
+</tr>
+
+<{foreach item=person from=$persons}>
+<{ if $person->getVar('oddrow') == true }>
+<tr class="odd">
+<{/if}>
+<{if $person->getVar('oddrow') == false }>
+<tr class="even">
+<{/if}>
+
+<td width=10><input name="chk<{$person->getVar('loopcount')}>" value="<{$person->getVar('id')}>" type="checkbox"></td>
+<td><{$person->getVar('lastname')}></td>
+<td><{$person->getVar('address1')}></td>
+<td><{$person->getVar('homephone')}></td>
+<td><{$person->getVar('event_name')}></td>
+<td><{$person->getVar('event_date')}></td>
+</tr>
+<{/foreach}>
+
+</table>
+<input type="hidden" name="loopcount" value="<{$loopcount}>">
+</form>
+

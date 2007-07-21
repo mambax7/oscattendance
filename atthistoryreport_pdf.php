@@ -50,45 +50,46 @@ elseif( file_exists(XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirnam
 // Avoid a bug in FPDF..
 setlocale(LC_NUMERIC,'C');
 
-		$attendanceev_handler = &xoops_getmodulehandler('attendanceevent','oscattendance');
-		
-		//get attendance count for last 90 days
-		
-		$attendance90 = $attendanceev_handler->getAttcount($eventid,90);
-		
-		$att_table="<table border=1><tr bgcolor=#C0C0C0>";
-		$att_table.="<th>" . _oscatt_date . "</th><th>" . _oscatt_eventname . "</th><th>" . _oscatt_count . "</th></tr>";
-		
-		$ae=$attendanceev_handler->create();
-		
-		foreach($attendance90 as $ae)
-		{
-		$att_table.="<tr><td>" . $ae->getVar('att_Date');
-		$att_table.="</td><td>" . $ae->getVar('event_Name');
-		$att_table.="</td><td>" . $ae->getVar('attendancecount');
-		$att_table.="</td></tr>";
-		} 
-		$att_table.="</table>";
-		$att_table_90=$att_table;
-		
-		$attendanceYTD = $attendanceev_handler->getAttcountYTD($eventid);
-		
-		$att_table="<table border=1><tr bgcolor=#C0C0C0>";
-		$att_table.="<th>" . _oscatt_eventname . "</th><th>" . _oscatt_month . "</th><th>" . _oscatt_year . "</th><th>" . _oscatt_count . "</th></tr>";
-		
-		
-		foreach($attendanceYTD as $ae)
-		{
-			$att_table.="<tr><td>" . $ae->getVar('event_Name');
-			$att_table.="</td><td>" . $ae->getVar('attmonth');
-			$att_table.="</td><td>" . $ae->getVar('attyear');
-			
-			$att_table.="</td><td>" . $ae->getVar('attendancecount');
-			$att_table.="</td></tr>";
-		} 
-		$att_table.="</table>";
-		
-		$att_table_YTD=$att_table;
+$attendanceev_handler = &xoops_getmodulehandler('attendanceevent','oscattendance');
+
+//get attendance count for last 90 days
+
+$attendance90 = $attendanceev_handler->getAttcount($eventid,90);
+
+$att_table="<table border=1><tr bgcolor=#C0C0C0>";
+$att_table.="<th>" . _oscatt_date . "</th><th>" . _oscatt_eventname . "</th><th>" . _oscatt_count . "</th></tr>";
+
+$ae=$attendanceev_handler->create();
+
+foreach($attendance90 as $ae)
+{
+$att_table.="<tr><td>" . $ae->getVar('att_Date');
+$att_table.="</td><td>" . $ae->getVar('event_Name');
+$att_table.="</td><td>" . $ae->getVar('attendancecount');
+$att_table.="</td></tr>";
+} 
+$att_table.="</table>";
+$att_table_90=$att_table;
+
+$attendanceYTD = $attendanceev_handler->getAttcountYTD($eventid);
+
+$att_table="<table border=1><tr bgcolor=#C0C0C0>";
+$att_table.="<th>" . _oscatt_eventname . "</th><th>" . _oscatt_month . "</th><th>" . _oscatt_year . "</th><th>" . _oscatt_count . "</th></tr>";
+
+
+foreach($attendanceYTD as $ae)
+{
+	$att_table.="<tr><td>" . $ae->getVar('event_Name');
+	$att_table.="</td><td>" . $ae->getVar('attmonth');
+	$att_table.="</td><td>" . $ae->getVar('attyear');
+	
+	$att_table.="</td><td>" . $ae->getVar('attendancecount');
+	$att_table.="</td></tr>";
+} 
+$att_table.="</table>";
+
+$att_table_YTD=$att_table;
+
 
 $churchdetail_handler = &xoops_getmodulehandler('churchdetail', 'oscmembership');
 	
@@ -107,7 +108,7 @@ class PDF extends HTML2FPDF
 		$header="Generated: " . $today;
 		
 		//Select Arial bold 15
-		$this->SetFont($this->_Font,'B',9);
+//		$this->SetFont($this->_Font,'B',9);
 		//Line break
 		$this->Ln(3);
 		//Move to the right
@@ -154,9 +155,8 @@ $today = date("F j, Y");
 $pdf=new PDF('P','mm',$paperFormat);
 $pdf->Open();
 $pdf->AddPage();
-$pdf->SetFont('Arial','',11); 
-//$pdf->AliasNbPages();
+//$pdf->SetFont('Arial','',11); 
+$pdf->AliasNbPages();
 $pdf->CreateReport($att_table_90, $att_table_YTD);
-
 $pdf->Output();
 ?>
