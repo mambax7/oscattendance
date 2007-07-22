@@ -53,8 +53,7 @@ $content_block="
 </tr>
 </table>
 ";
-	
-		
+
 	$block['title'] = _oscatt_nav_block_title;
 	$block['content'] = $content_block;
 

@@ -1,12 +1,12 @@
 <?php
 $modversion['name'] = _oscatt_MOD_NAME;
-$modversion['version'] = "3.05";
+$modversion['version'] = "3.06";
 $modversion['description'] = _oscatt_MOD_DESC;
 $modversion['credits'] = "Open Source Church Project - http://sourceforge.net/osc";
 $modversion['author'] = "Steve McAtee";
 $modversion['help'] = "help.html";
 $modversion['license'] = "GPL see LICENSE";
-$modversion['official'] = 3.05;
+$modversion['official'] = 3.06;
 $modversion['image'] = "images/module_logo.png";
 $modversion['dirname'] = "oscattendance";
 $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
@@ -28,11 +28,10 @@ $modversion['templates'][4]['description']='Attendance History Report';
 $modversion['templates'][5]['file'] = 'noattendance_report.html';
 $modversion['templates'][5]['description']='No Attendance Report';
 
-$modversion['blocks'][0]['file'] = "oscattnav.php";
-$modversion['blocks'][0]['name'] = _oscatt_navigationblock;
-$modversion['blocks'][0]['description'] = _oscatt_navigation_description;
-
-$modversion['blocks'][0]['show_func'] = "oscattnav_show";
+$modversion['blocks'][1]['file'] = "oscattnav.php";
+$modversion['blocks'][1]['name'] = "Attendance";
+$modversion['blocks'][1]['description'] = "Attendance";
+$modversion['blocks'][1]['show_func'] = "oscattnav_show";
 
 $modversion['hasSearch'] = 0;
 //$modversion['search']['file']="include/search.inc.php";

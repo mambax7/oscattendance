@@ -75,5 +75,4 @@ define("_oscatt_noattendance_list","No Attendance List");
 define("_oscatt_addtocart","Add to Cart");
 define("_oscatt_addedtocart","Added to Cart");
 define("_oscatt_applydays","Apply Days");
-define("_oscatt_clearfilter","Clear Filter");
 ?>
