@@ -100,10 +100,14 @@ $xoopsTpl->assign('attendanceevents',$results);
 $xoopsTpl->assign('oscatt_addatttocart',_oscatt_addatttocart);
 $xoopsTpl->assign('oscatt_date',_oscatt_date);
 $xoopsTpl->assign('oscatt_delete',_oscatt_delete);
-$attendanceevent=$results[0];
 
+$attendanceevent=$results[0];
+if(isset($attendanceevent))
+{
 $totalloopcount=$attendanceevent->getVar('totalloopcount');
 $xoopsTpl->assign('loopcount', $totalloopcount);
+}
+else $xoopsTpl->assign('loopcount',0);
 
 
 include(XOOPS_ROOT_PATH."/footer.php");

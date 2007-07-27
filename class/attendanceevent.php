@@ -92,7 +92,7 @@ class oscAttendanceAttendanceeventHandler extends XoopsObjectHandler
 	{
 	        $attendanceevent= &$this->create(false);
 
-		$sql="select a.*,e.event_Name,c.att_count `attendancecount` from xoops_oscatt_attendance a join xoops_oscatt_events e on a.event_id = e.event_id  join (select att_id, count(1) att_count from xoops_oscatt_attendance_person group by att_id) c on a.att_id=c.att_id";
+		$sql="select a.*,e.event_Name,c.att_count `attendancecount` from " . $this->db->prefix("oscatt_attendance") . " a join  " . $this->db->prefix("oscatt_events") . " e on a.event_id = e.event_id  join (select att_id, count(1) att_count from " . $this->db->prefix("oscatt_attendance_person") . " group by att_id) c on a.att_id=c.att_id";
 
 //		$sql="select a.*,e.event_Name,0 `count`  from xoops_oscatt_attendance a join xoops_oscatt_events e on a.event_id = e.event_id";
 
@@ -121,10 +121,12 @@ class oscAttendanceAttendanceeventHandler extends XoopsObjectHandler
 			break;
 			}
 		}
+
+		$returnfalse = false;
 		
 		if (!$result = $this->db->query($sql)) 
 		{
-			return false;
+			return $returnfalse;
 		}
 		$oddrow=false;
 

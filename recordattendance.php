@@ -18,6 +18,8 @@ if(!($ispermmodify==true || $ispermview==true) & !($xoopsUser->isAdmin($xoopsMod
     redirect_header(XOOPS_URL , 3, _oscatt_accessdenied);
 }
 
+$op="";
+
 if (isset($_GET['op'])) $op = $_GET['op'];
 if (isset($_POST['op'])) $op = $_POST['op'];
 if (isset($_POST['action'])) $action=$_POST['action'];
@@ -87,13 +89,19 @@ $cart_tray = new XoopsFormElementTray('', '&nbsp;');
 $memberresult="<table><th>" . _oscatt_lastname . "</th><th>" . _oscatt_firstname . "</th><th>" . _oscatt_address . "</th>";
 
 $i=0;
-foreach($cartpersons as $person)
+if($cartpersons!=false)
 {
-	$memberresult .= "<tr><td>" . $person->getVar('lastname') . "</td>";
-	$memberresult .= "<td>" . $person->getVar('firstname') . "</td>";
-	$memberresult .="<td>" . $person->getVar('address1') . "&nbsp;" . $person->getVar('city') . ",&nbsp;" . $person->getVar('state') . "</td>";
-	$memberresult .= "</tr>";
-	$i++;
+	
+	$person=$person_handler->create(false);
+
+	foreach($cartpersons as $person)
+	{
+		$memberresult .= "<tr><td>" . $person->getVar('lastname') . "</td>";
+		$memberresult .= "<td>" . $person->getVar('firstname') . "</td>";
+		$memberresult .="<td>" . $person->getVar('address1') . "&nbsp;" . $person->getVar('city') . ",&nbsp;" . $person->getVar('state') . "</td>";
+		$memberresult .= "</tr>";
+		$i++;
+	}
 }
 $memberresult .="<tr><td colspan=3><hr><br>" . _oscatt_totalcountis . "&nbsp;" . $i . "</td></tr>";
 $memberresult .="</table>";
