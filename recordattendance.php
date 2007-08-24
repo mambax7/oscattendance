@@ -10,10 +10,12 @@ if (!$xoopsUser)
 
 include XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/include/functions.php";
 
+
 if(hasPerm("oscattendance_view",$xoopsUser)) $ispermview=true;
 if(hasPerm("oscattendance_modify",$xoopsUser)) $ispermmodify=true;
 
-if(!($ispermmodify==true || $ispermview==true) & !($xoopsUser->isAdmin($xoopsModule->mid())))
+
+if(!($ispermmodify==true || $ispermview==true))
 {
     redirect_header(XOOPS_URL , 3, _oscatt_accessdenied);
 }

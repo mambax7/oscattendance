@@ -44,29 +44,21 @@ include_once(XOOPS_ROOT_PATH . "/class/xoopsformloader.php");
 xoops_cp_header();
 
 $module_id = $xoopsModule->getVar('mid');
-	$title_of_form = _oscgiv_permissions_modify;
-	$perm_name = 'oscgiving_modify';
-	$perm_desc = _oscgiv_permissions_modify_desc;
+	$title_of_form = _oscatt_permissions_modify;
+	$perm_name = 'oscattendance_modify';
+	$perm_desc = _oscatt_permissions_modify_desc;
 	$form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/perm.php');
-	$form->addItem('1',_oscgiv_permissions_modify);
+	$form->addItem('1',_oscatt_permissions_modify);
 	
 	echo $form->render().'<br />';
 
-	$title_of_form = _oscgiv_permissions_admin;
-	$perm_name = 'oscgiving_admin';
-	$perm_desc = _oscgiv_permissions_admin_desc;
+	$title_of_form = _oscatt_permissions_admin;
+	$perm_name = 'oscattendance_admin';
+	$perm_desc = _oscatt_permissions_admin_desc;
 	$form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/perm.php');
-	$form->addItem('1',_oscgiv_permissions_admin);
+	$form->addItem('1',_oscatt_permissions_admin);
 	
 	echo $form->render().'<br />';
 	
-	$yearendform=new XoopsFormTextArea("yearendletter","yearletter","",30,50);
-	
-	$yearendform->render();
-	
-	echo "
-<img onmouseover='style.cursor=\"hand\"' onclick='javascript:openWithSelfMain(\"" .XOOPS_URL . "/imagemanager.php?target=\'test\'\",\"imgmanager\",400,430);' src='".XOOPS_URL."/images/image.gif' alt='image' />&nbsp;
-	";
-
 xoops_cp_footer();
 ?>

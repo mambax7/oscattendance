@@ -5,7 +5,7 @@ if ( $xoopsUser )
 	{
 		$groupPermHandler =& xoops_gethandler('groupperm');
 		$moduleHandler =& xoops_gethandler('module');
-		$module = $moduleHandler->getByDirname('oscgiving');
+		$module = $moduleHandler->getByDirname('oscattendance');
 
 		$returnval = false;
 		$perm=$groupPermHandler->getItemIds($permission,$user->getGroups(),$module->getVar("mid"));
