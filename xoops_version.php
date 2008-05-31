@@ -27,6 +27,8 @@ $modversion['templates'][4]['file'] = 'atthistory.html';
 $modversion['templates'][4]['description']='Attendance History Report';
 $modversion['templates'][5]['file'] = 'noattendance_report.html';
 $modversion['templates'][5]['description']='No Attendance Report';
+$modversion['templates'][6]['file'] = 'checkin.html';
+$modversion['templates'][6]['description']='Check In Form';
 
 $modversion['blocks'][1]['file'] = "oscattnav.php";
 $modversion['blocks'][1]['name'] = "Attendance";
