@@ -80,4 +80,6 @@ define("_oscmem_childcheckin","Child Checkin");
 define("_oscmem_printchild","Check In");
 define("_oscmem_entersearchcriteria","Enter Search Criteria");
 
+define("_oscatt_admin_permissions","Modify Permissions");
+
 ?>
