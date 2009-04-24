@@ -84,12 +84,16 @@ $datelastedited_label = new XoopsFormLabel(_oscatt_datelastedited, $event->getVa
 
 $user=new XoopsUser();
 
-if($event->getVar('editedby')<>'')
+if($event->getVar('editedby')<>'' && $event->getVar('editedby')>0)
 {
 	$user = $member_handler->getUser($event->getVar('editedby'));
 }
+else $user=null;
 
-$editedby_label = new XoopsFormLabel(_oscatt_editedby, $user->getVar('uname'));
+
+if(isset($user))
+{ $editedby_label = new XoopsFormLabel(_oscatt_editedby, $user->getVar('uname')); }
+else $editedby_label=new XoopsFormLabel(_oscatt_editedby,null);
 
 $dateentered_label = new XoopsFormLabel(_oscatt_dateentered, $event->getVar('dateentered'));
 
