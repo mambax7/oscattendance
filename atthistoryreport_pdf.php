@@ -13,6 +13,7 @@
 
 include_once "../../mainfile.php";
 
+
 //redirect
 if (!$xoopsUser)
 {
@@ -21,7 +22,8 @@ if (!$xoopsUser)
 
 require (XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/include/ReportConfig.php");
 
-require (XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/include/html2fpdf/html2fpdf.php");
+require (XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/include/html2fpdf/html2pdf.class.php");
+//include XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/include/fpdf151/fpdf.php";
 
 require XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/include/functions.php";
 
@@ -95,31 +97,33 @@ $churchdetail_handler = &xoops_getmodulehandler('churchdetail', 'oscmembership')
 	
 $churchdetail=$churchdetail_handler->get();
 		
-class PDF extends HTML2FPDF
+class PDF extends HTML2PDF
 {
 
 	//Page header
-	function Header()
+	function xsetPageHeader()
 	{
 		$t=getdate();
    
     		$today=date('Y-m-d h:m',$t[0]);
 		
-		$header="Generated: " . $today;
+		$header="<p>Generated: " . $today . "</p>";
 		
 		//Select Arial bold 15
 //		$this->SetFont($this->_Font,'B',9);
 		//Line break
-		$this->Ln(3);
+//		$this->Ln(3);
 		//Move to the right
 //		$this->Cell(10);
 		//Framed title
-		$this->Cell(190,10,$header,'T',0,'R');
-		$this->SetLineWidth(0.5);
+                $this->WriteHTML($header);
+//		$this->Cell(190,10,$header,'T',0,'R');
+//		$this->SetLineWidth(0.5);
 	}
 
 	//Page footer
-	function Footer()
+    
+	function xsetPageFooter()
 	{
 		//global $sExemptionLetter_FooterLine;
 
@@ -128,16 +132,23 @@ class PDF extends HTML2FPDF
 		
 		// if ($this->PageNo() == 1){
 		// Position at 1.5 cm from bottom
-		$this->SetY(-15);
+
+                $this->WriteHTML($footer);
+
+                /*$this->SetY(-15);
 		$this->SetFont('Arial','',9);
 		$this->SetLineWidth(0.5);
 		$this->Cell(0,10,$footer,'T',0,'C');
+                 * */
+                 
 	}
 
+    
 	function CreateReport($table1, $table2)
 	{
-	
-		$title="<h1>" . _oscatt_attendancereport_title . "</h1>";
+
+                $this->WriteHTML('');  //add line spacing
+		$title= "<h1>" .  _oscatt_attendancereport_title . "</h1>";
 		
 		$this->WriteHTML($title);
 		$this->WriteHTML($table1);
@@ -146,17 +157,20 @@ class PDF extends HTML2FPDF
 		
 		
 	}
+      
+     
 }
 
 
 // Main
 $today = date("F j, Y");
 
-$pdf=new PDF('P','mm',$paperFormat);
-$pdf->Open();
-$pdf->AddPage();
-//$pdf->SetFont('Arial','',11); 
-$pdf->AliasNbPages();
+$pdf=new PDF('P',$paperFormat, 'en');
+//$pdf->AddPage();
+//$pdf->SetFont('Arial','',11);
+//$pdf->AliasNbPages();
 $pdf->CreateReport($att_table_90, $att_table_YTD);
 $pdf->Output();
+//echo $att_table_90;
+
 ?>
